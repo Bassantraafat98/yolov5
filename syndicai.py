@@ -1,12 +1,12 @@
-import io
-import torch
 import base64
 import urllib.request
-import numpy as np
-
 from pathlib import Path
-from cv2 import cv2
 from PIL import Image
+import io
+
+import numpy as np
+import torch
+from cv2 import cv2
 
 from models.experimental import attempt_load
 from utils.datasets import LoadImages
@@ -65,14 +65,10 @@ class syndicai:
                     label = f'{names[int(cls)]} {conf:.2f}'
                     plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=3)
 
-            img = Image.fromarray(im0.astype("uint8"))
+            img = Image.fromarray(im0)
 
             im_file = io.BytesIO()
             img.save(im_file, format="PNG")
             im_bytes = base64.b64encode(im_file.getvalue()).decode("utf-8") 
-
-            # save output image
-            #output = Image.open(io.BytesIO(base64.b64decode(im_bytes)))
-            #output.save('output.png', 'PNG')
 
             return im_bytes
