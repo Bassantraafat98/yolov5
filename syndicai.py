@@ -6,6 +6,7 @@ import io
 
 import numpy as np
 import torch
+from cv2 import cv2
 
 from models.experimental import attempt_load
 from utils.datasets import LoadImages
@@ -14,16 +15,15 @@ from utils.plots import plot_one_box
 from utils.torch_utils import select_device
 
 
-class PythonPredictor(object):
+class syndicai:
 
-    def __init__(self, config):
+    def __init__(self):
         urllib.request.urlretrieve("https://github.com/ultralytics/yolov5/releases/download/v3.1/yolov5s.pt", "yolov5s.pt")
 
-    def predict(self, payload):
+    def predict(self, X, features_names=None):
         """ Model Run function """
 
-        im_encoded = payload['strData']
-        im = Image.open(io.BytesIO(base64.b64decode(im_encoded)))
+        im = Image.open(io.BytesIO(base64.b64decode(X)))
         im.save('image.png', 'PNG')
 
         # Initialize
@@ -65,5 +65,10 @@ class PythonPredictor(object):
                     label = f'{names[int(cls)]} {conf:.2f}'
                     plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=3)
 
-            return {'strData': base64.b64encode(im0)}
+            img = Image.fromarray(im0)
 
+            im_file = io.BytesIO()
+            img.save(im_file, format="PNG")
+            im_bytes = base64.b64encode(im_file.getvalue()).decode("utf-8") 
+
+            return im_bytes

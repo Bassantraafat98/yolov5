@@ -20,6 +20,8 @@
 *.data
 *.json
 
+docker-compose.yaml
+
 *.cfg
 !cfg/yolov3*.cfg
 
