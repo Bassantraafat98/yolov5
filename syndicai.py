@@ -15,15 +15,15 @@ from utils.plots import plot_one_box
 from utils.torch_utils import select_device
 
 
-class syndicai:
+class PythonPredictor:
 
-    def __init__(self):
+    def __init__(self, config):
         urllib.request.urlretrieve("https://github.com/ultralytics/yolov5/releases/download/v3.1/yolov5s.pt", "yolov5s.pt")
 
-    def predict(self, X, features_names=None):
+    def predict(self, payload):
         """ Model Run function """
 
-        im = Image.open(io.BytesIO(base64.b64decode(X)))
+        im = Image.open(io.BytesIO(base64.b64decode(payload["base64"])))
         im.save('image.png', 'PNG')
 
         # Initialize
