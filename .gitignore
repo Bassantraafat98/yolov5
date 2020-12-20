@@ -21,6 +21,7 @@
 *.json
 
 docker-compose.yaml
+wrappers/
 
 *.cfg
 !cfg/yolov3*.cfg
