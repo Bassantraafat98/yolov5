@@ -1,5 +1,0 @@
-- name: yolov5
-  kind: RealtimeAPI
-  predictor:
-    type: python
-    path: syndicai.py
