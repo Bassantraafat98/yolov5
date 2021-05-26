@@ -18,7 +18,7 @@ from utils.torch_utils import select_device
 class PythonPredictor:
 
     def __init__(self, config):
-        urllib.request.urlretrieve("https://github.com/ultralytics/yolov5/releases/download/v3.1/yolov5s.pt", "yolov5s.pt")
+        urllib.request.urlretrieve("https://github.com/Bassantraafat98/yolov5/blob/master/best.pt", "yolov5s.pt")
 
     def predict(self, payload):
         """ Model Run function """
